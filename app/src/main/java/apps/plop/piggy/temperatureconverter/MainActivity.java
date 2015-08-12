@@ -20,16 +20,30 @@ public class MainActivity extends Activity {
 
     public void onClick(View view)
     {
-        switch(view.getId()) {
-            case R.id.button1:
-                RadioButton celsiusButon = (RadioButton) findViewById(R.id.radio0);
-                RadioButton fahrenheitButon = (RadioButton) findViewById(R.id.radio1);
-                if(text.getText().length() == 0) {
-                    Toast.makeText(this, "Please enter a valid number", Toast.LENGTH_LONG).show();
-                    return;
-                }
+		switch (view.getId()) {
+			case R.id.button1:
+				RadioButton celsiusButton = (RadioButton) findViewById(R.id.radio0);
+				RadioButton fahrenheitButton = (RadioButton) findViewById(R.id.radio1);
+				if (text.getText().length() == 0) {
+					Toast.makeText(this, "Please enter a valid number",
+								   Toast.LENGTH_LONG).show();
+					return;
+				}
 
-                float inputValue = Float.parseFloat(text.getText().toString());
+				float inputValue = Float.parseFloat(text.getText().toString());
+				if (celsiusButton.isChecked()) {
+					text.setText(String
+								 .valueOf(ConvertUtil.convertFahrenheitToCelsius(inputValue)));
+					celsiusButton.setChecked(false);
+					fahrenheitButton.setChecked(true);
+				} else {
+					text.setText(String
+								 .valueOf(ConvertUtil.convertCelsiusToFahrenheit(inputValue)));
+					fahrenheitButton.setChecked(false);
+					celsiusButton.setChecked(true);
+				}
+				break;
+		
         }
     }
 }
